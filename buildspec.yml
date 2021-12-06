@@ -5,14 +5,11 @@ phases:
   pre_build:
     commands:
       - mvn clean install
-<<<<<<< HEAD
       - apt-get install wget apt-transport-https gnupg
       - wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add -
       - echo deb https://aquasecurity.github.io/trivy-repo/deb bionic main | tee -a /etc/apt/sources.list.d/trivy.list
       - apt-get update
       - apt-get install -y trivy
-=======
->>>>>>> 948ee20ef8bd7a08a0f6c3707d0d5ae4f4b52669
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
@@ -22,21 +19,14 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-<<<<<<< HEAD
       - echo Building the Docker image...
-=======
-      - echo Building the Docker image... 
->>>>>>> 948ee20ef8bd7a08a0f6c3707d0d5ae4f4b52669
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-<<<<<<< HEAD
-      - trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL $REPOSITORY_URI:success
-=======
->>>>>>> 948ee20ef8bd7a08a0f6c3707d0d5ae4f4b52669
+      - trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL $REPOSITORY_URI:$IMAGE_TAG
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
