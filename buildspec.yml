@@ -8,6 +8,7 @@ phases:
       - apt-get install wget apt-transport-https gnupg
       - wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add -
       - echo deb https://aquasecurity.github.io/trivy-repo/deb bionic main | tee -a /etc/apt/sources.list.d/trivy.list
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
       - apt-get update
       - apt-get install -y trivy
       - echo Logging in to Amazon ECR...
