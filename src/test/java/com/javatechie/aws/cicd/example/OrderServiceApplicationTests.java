@@ -8,6 +8,8 @@ class OrderServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
+		System.out.prinln("test");
 	}
 
 }
